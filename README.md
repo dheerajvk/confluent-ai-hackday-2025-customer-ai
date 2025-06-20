@@ -96,33 +96,40 @@ python src/main.py
 
 ## ⚙️ **Configuration**
 
-### **Environment Variables (.env)**
+### **Environment Variables (env.template)**
 ```bash
 # Demo Mode (Default - No APIs required)
-DEMO_MODE=true
+DEMO_MODE=false
 GRADIO_PORT=7860
 LOG_LEVEL=INFO
 
 # Claude AI (Required for Production)
-ANTHROPIC_API_KEY=your-claude-api-key
+ANTHROPIC_API_KEY=******
 
 # Confluent Cloud (Required for Production)
-CONFLUENT_BOOTSTRAP_SERVERS=your-server.confluent.cloud:9092
-CONFLUENT_API_KEY=your-api-key
-CONFLUENT_API_SECRET=your-api-secret
+CONFLUENT_BOOTSTRAP_SERVERS=******
+CONFLUENT_API_KEY=******
+CONFLUENT_API_SECRET=******
 
 # Schema Registry (Required for Avro serialization)
 SCHEMA_REGISTRY_URL=******
-SCHEMA_REGISTRY_API_KEY=your-schema-registry-api-key
-SCHEMA_REGISTRY_API_SECRET=your-schema-registry-api-secret
+SCHEMA_REGISTRY_API_KEY=******
+SCHEMA_REGISTRY_API_SECRET=******
 
 # Kafka Topics
 KAFKA_TOPIC_TICKETS=support-tickets
 KAFKA_TOPIC_PROCESSED=processed-tickets
 KAFKA_TOPIC_RESPONSES=ai-responses
 
+# Kafka Timeout Configuration (milliseconds)
+KAFKA_SESSION_TIMEOUT_MS=60000      # 60 seconds
+KAFKA_REQUEST_TIMEOUT_MS=45000      # 45 seconds  
+KAFKA_SOCKET_TIMEOUT_MS=60000       # 60 seconds
+KAFKA_DELIVERY_TIMEOUT_MS=120000    # 2 minutes
+KAFKA_MESSAGE_TIMEOUT_MS=300000     # 5 minutes
+
 # JSON-RPC 2.0 Configuration
-USE_JSONRPC_2_0=true
+USE_JSONRPC_2_0=true                # Enable JSON-RPC 2.0 standard messaging
 ```
 
 ## 🏭 **Production Deployment**
@@ -182,15 +189,8 @@ The application automatically creates topics when `DEMO_MODE=false`. Topics are 
 - **7-day retention** for data persistence
 - **Delete cleanup policy** for automatic cleanup
 
-#### **Option D: Standalone Topic Creator**
-Use the dedicated script for topic creation:
-```bash
-# Create topics with interactive prompts
-python3 create_topics.py
-
-# Or in production mode
-DEMO_MODE=false python3 create_topics.py
-```
+#### **Note on Topic Creation**
+Topic creation is handled automatically by the application when `DEMO_MODE=false`. Standalone topic creation scripts have been removed for simplicity.
 
 ### **Step 3: Schema Registry Setup**
 
@@ -212,10 +212,7 @@ SCHEMA_REGISTRY_API_SECRET=your-schema-registry-secret
 ```
 
 #### **3.3 Register Avro Schemas**
-```bash
-# Register all schemas for the topics
-python3 register_schemas.py
-```
+Schema registration is handled automatically by the application when Schema Registry is configured. Manual registration scripts have been removed for simplicity.
 
 ### **Step 4: Claude AI Setup**
 1. Go to [Anthropic Console](https://console.anthropic.com)
@@ -381,50 +378,27 @@ The dashboard shows current Stream Lineage status:
 - **Multiple Clients**: Both producer and consumer will appear as separate nodes
 - **Topic Connections**: See how your app connects to all three topics
 
-### **Stream Lineage Status Checker**
+### **Stream Lineage Monitoring**
 
-Use the dedicated wrapper scripts to check your Stream Lineage status:
+Stream Lineage visibility is built into the main application:
 
-#### **Option 1: Bash Wrapper (Recommended)**
-```bash
-./check_stream_lineage.sh
-```
+- **Automatic Client Identification**: `gradio-sentiment-producer/consumer`
+- **Real-time Activity Tracking**: Monitor data flow in Confluent Cloud
+- **Dashboard Integration**: Stream lineage status shown in the UI
 
-#### **Option 2: Python Wrapper**
-```bash
-python3 stream_lineage_status.py
-```
+#### **Stream Lineage Monitoring:**
+Stream lineage information is available through:
+- **Gradio Dashboard**: Real-time status display
+- **Application Logs**: Detailed activity tracking  
+- **Confluent Cloud UI**: Visual stream lineage graph
 
-#### **Option 3: Simple Checker (No Dependencies)**
-```bash
-python3 check_stream_lineage_simple.py
-```
-
-#### **Features:**
-- **Instructions**: Step-by-step guide to find your app in Stream Lineage
-- **Activity Report**: Current status and message count
-- **Prerequisites Check**: Validates configuration and connectivity
-- **Troubleshooting**: Recommendations for common issues
-- **Environment Validation**: Checks Python, dependencies, and .env file
-- **Automatic Fallback**: Bash wrapper automatically uses simple version if dependencies missing
-
-#### **Usage Examples:**
-```bash
-# Standard check
-./check_stream_lineage.sh
-
-# Quiet mode (less output)
-./check_stream_lineage.sh --quiet
-
-# Show help
-./check_stream_lineage.sh --help
-```
+> **Note**: All stream lineage monitoring is integrated into the main application. No separate scripts are needed.
 
 ### **Troubleshooting Stream Lineage**
 
 If your app doesn't appear in Stream Lineage:
 
-1. **Run Status Checker**: `./check_stream_lineage.sh` for detailed diagnosis
+1. **Check Application Logs**: Review logs for stream lineage activity
 2. **Ensure Active Mode**: Set `DEMO_MODE=false` for real Kafka activity
 3. **Send Messages**: Use the Gradio interface to send messages
 4. **Wait 10 Minutes**: Stream Lineage has a delay for new clients
@@ -437,17 +411,16 @@ If your app doesn't appear in Stream Lineage:
 
 #### **Confluent Connection Errors**
 ```bash
-# Check connectivity and credentials
-python3 test_confluent.py
-
 # Validate application setup
 ./run.sh --validate
+./run.sh --check
 
 # Check specific issues:
-# - Verify credentials in .env
+# - Verify credentials in .env or env.template
 # - Check bootstrap server URL format
 # - Ensure cluster is running
 # - Verify API key permissions
+# - Review application logs for connection details
 ```
 
 #### **Topic Creation Failures**
@@ -456,11 +429,9 @@ python3 test_confluent.py
 # Check cluster is running
 # Ensure sufficient credits
 
-# Use standalone topic creator
-python3 create_topics.py
-
+# Topics are created automatically by the application
 # Check if topics exist in Confluent UI
-# Manual topic creation via Confluent Cloud UI
+# Manual topic creation via Confluent Cloud UI if needed
 ```
 
 #### **Consumer Lag Issues**
@@ -472,24 +443,16 @@ python3 create_topics.py
 
 #### **Schema Registry Issues**
 ```bash
-# Check Schema Registry environment and dependencies
-python3 check_schema_registry.py
-
-# Set up Schema Registry dependencies
-./setup_schema_registry.sh
-
-# Test Schema Registry connection and functionality
-python3 test_schema_registry.py
-
-# Register schemas manually
-python3 register_schemas.py
+# Schema Registry is automatically handled by the application
+# Check application logs for Schema Registry status
 
 # Common issues and solutions:
 # 1. confluent-kafka not installed:
-#    → Run: ./setup_schema_registry.sh
+#    → Run: pip install confluent-kafka
+#    → Or use: ./install_basic_deps.sh
 
 # 2. Invalid Schema Registry URL:
-#    → Check SCHEMA_REGISTRY_URL in .env
+#    → Check SCHEMA_REGISTRY_URL in .env or env.template
 #    → Ensure Schema Registry is enabled in Confluent Cloud
 #    → Copy correct URL from Schema Registry tab
 
@@ -518,7 +481,8 @@ tail -f app.log
 top
 df -h
 
-# Test connectivity
+# Validate system setup
+./run.sh --validate
 ./run.sh --check
 ```
 
@@ -560,25 +524,23 @@ df -h
 
 ### **Project Structure**
 ```
-cc_v2/
+confluent-ai-hackday-2025-customer-ai/
 ├── src/
-│   ├── core/          # Sentiment analysis logic
+│   ├── core/          # Sentiment analysis logic and JSON-RPC implementation
 │   ├── ai/            # Claude AI integration
-│   ├── streaming/     # Kafka client, demo data, and Stream Lineage monitoring
+│   ├── streaming/     # Kafka client, data flow manager, and monitoring
 │   ├── schemas/       # Avro schemas and Schema Registry client
-│   └── ui/            # Gradio dashboard
+│   ├── ui/            # Gradio dashboard
+│   └── test/          # Test utilities
 ├── data/
 │   └── sample/        # Sample customer messages
-├── run.sh             # Bash launcher with cleanup
-├── run.py             # Python launcher with cleanup
-├── check_stream_lineage.sh # Stream Lineage status checker (Bash)
-├── stream_lineage_status.py # Stream Lineage status checker (Python)
-├── check_stream_lineage_simple.py # Simple Stream Lineage checker (no deps)
-├── register_schemas.py # Schema Registry setup script
+├── demo/              # Demo screenshots and stream lineage images
+├── run.sh             # Bash launcher with cleanup and validation
+├── run.py             # Python launcher with cleanup and validation
+├── install_basic_deps.sh # Basic dependency installer
 ├── requirements.txt   # Python dependencies
-├── pyproject.toml     # Project configuration
-├── SCHEMA_REGISTRY_README.md # Schema Registry documentation
-└── .env              # Environment variables
+├── pyproject.toml     # Project configuration with build system
+└── env.template       # Environment variables template
 ```
 
 ### **Available Commands**
@@ -586,10 +548,11 @@ cc_v2/
 # Full application launch
 ./run.sh
 
-# System validation
-./run.sh --validate
+# Python launcher alternative
+python3 run.py
 
-# System requirements check
+# System validation and checks
+./run.sh --validate
 ./run.sh --check
 
 # Deep cleanup (venv, cache, logs)
@@ -598,38 +561,17 @@ cc_v2/
 # Help and options
 ./run.sh --help
 
-# Test Confluent Cloud connectivity
-python3 test_confluent.py
+# Install basic dependencies (if needed)
+./install_basic_deps.sh
 
-# Create topics manually
-python3 create_topics.py
+# Development commands
+pip install -e .                    # Install in development mode
+python -m pytest src/test/          # Run tests (if available)
+python -m ruff check src/           # Code linting
+python -m black src/                # Code formatting
 
-# Register Avro schemas to Schema Registry
-python3 register_schemas.py
-
-# Check Schema Registry environment and dependencies
-python3 check_schema_registry.py
-
-# Set up Schema Registry dependencies (creates virtual environment)
-./setup_schema_registry.sh
-
-# Test Schema Registry functionality with sample data
-python3 test_schema_registry.py
-
-# Test JSON-RPC 2.0 implementation
-python3 test_jsonrpc.py
-
-# Check Stream Lineage status (Bash wrapper - Recommended)
-./check_stream_lineage.sh
-
-# Check Stream Lineage status (Python wrapper with dependencies)
-python3 stream_lineage_status.py
-
-# Check Stream Lineage status (Simple - no dependencies)
-python3 check_stream_lineage_simple.py
-
-# Show Stream Lineage instructions and status (Direct import - requires venv)
-python3 -c "from src.streaming.stream_lineage_monitor import show_lineage_instructions, print_lineage_status; show_lineage_instructions(); print_lineage_status()"
+# Stream Lineage monitoring (requires running app)
+# Access via the Gradio dashboard or application logs
 ```
 
 ### **Schema Registry Integration**
