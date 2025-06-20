@@ -42,6 +42,8 @@ https://drive.google.com/file/d/1GZq2h_5EXjfJqo7vR_5xm817IeHqAFH7/view?usp=shari
 ![Alt text](demo/1.png)
 ![Alt text](demo/2.png)
 ![Alt text](demo/3.png)
+![7E536AC7-7750-47EC-9E62-0E664E15C0BE](https://github.com/user-attachments/assets/df8d3984-ca49-4b2a-ba1f-40f4d355a13e)
+
 
 ## 📊 **Features**
 
