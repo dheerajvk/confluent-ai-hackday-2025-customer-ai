@@ -41,7 +41,7 @@ https://drive.google.com/file/d/1GZq2h_5EXjfJqo7vR_5xm817IeHqAFH7/view?usp=shari
 
 ![Alt text](demo/1.png)
 ![Alt text](demo/2.png)
-
+![Alt text](demo/3.png)
 
 ## 📊 **Features**
 
