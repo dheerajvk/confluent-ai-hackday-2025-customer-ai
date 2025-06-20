@@ -766,3 +766,9 @@ MIT License - Perfect for hackathon and production use.
 
 **Dashboard available at:** http://localhost:7860  
 **Perfect for your hackathon demo!** 🚀
+
+**Future Scope** 
+<img width="1483" alt="Screenshot 2025-06-20 at 3 19 57 PM" src="https://github.com/user-attachments/assets/01e5d7bc-1eae-4141-b403-7ddf627f7c81" />
+
+
+
