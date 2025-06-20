@@ -1,0 +1,82 @@
+[
+  {
+    "ticket_id": "T001",
+    "customer_id": "C001", 
+    "customer_name": "John Smith",
+    "message": "I am absolutely furious! Your service has been down for 3 hours and I'm losing money every minute. This is completely unacceptable and I demand immediate action!",
+    "timestamp": "2024-01-15T10:30:00Z",
+    "channel": "live_chat"
+  },
+  {
+    "ticket_id": "T002",
+    "customer_id": "C002",
+    "customer_name": "Sarah Johnson", 
+    "message": "Hi there, I'm having some trouble logging into my account. Could someone please help me reset my password?",
+    "timestamp": "2024-01-15T10:32:00Z",
+    "channel": "email"
+  },
+  {
+    "ticket_id": "T003",
+    "customer_id": "C003",
+    "customer_name": "Mike Chen",
+    "message": "This is ridiculous! I've been waiting for support for over 2 hours. Your chat system is broken and nobody is responding. I'm canceling my subscription right now!",
+    "timestamp": "2024-01-15T10:35:00Z", 
+    "channel": "live_chat"
+  },
+  {
+    "ticket_id": "T004",
+    "customer_id": "C004",
+    "customer_name": "Emily Davis",
+    "message": "Thank you so much for the quick response yesterday! The billing issue has been completely resolved and I really appreciate the excellent customer service.",
+    "timestamp": "2024-01-15T10:40:00Z",
+    "channel": "email"
+  },
+  {
+    "ticket_id": "T005", 
+    "customer_id": "C005",
+    "customer_name": "Robert Wilson",
+    "message": "URGENT: Our production system is completely down and affecting thousands of users. We need immediate escalation to your senior technical team!",
+    "timestamp": "2024-01-15T10:45:00Z",
+    "channel": "phone"
+  },
+  {
+    "ticket_id": "T006",
+    "customer_id": "C006",
+    "customer_name": "Lisa Brown",
+    "message": "I love the new features you added last week! The interface is so much cleaner and easier to use. Keep up the great work!",
+    "timestamp": "2024-01-15T10:50:00Z",
+    "channel": "feedback_form"
+  },
+  {
+    "ticket_id": "T007",
+    "customer_id": "C007", 
+    "customer_name": "David Miller",
+    "message": "Hey, quick question about the pricing plans. I'm looking to upgrade but want to understand the differences between Pro and Enterprise tiers.",
+    "timestamp": "2024-01-15T10:55:00Z",
+    "channel": "live_chat"
+  },
+  {
+    "ticket_id": "T008",
+    "customer_id": "C008",
+    "customer_name": "Jennifer Taylor",
+    "message": "I'm extremely disappointed with the recent service outages. This is the third time this month and it's affecting my business operations. What are you doing to prevent this?",
+    "timestamp": "2024-01-15T11:00:00Z",
+    "channel": "email"
+  },
+  {
+    "ticket_id": "T009",
+    "customer_id": "C009",
+    "customer_name": "Chris Anderson", 
+    "message": "The mobile app crashes every time I try to upload files. This bug has been around for weeks and still isn't fixed. Please prioritize this!",
+    "timestamp": "2024-01-15T11:05:00Z",
+    "channel": "mobile_app"
+  },
+  {
+    "ticket_id": "T010",
+    "customer_id": "C010",
+    "customer_name": "Amanda White",
+    "message": "Could you please send me a copy of my invoice from last month? I need it for my accounting records. Thanks!",
+    "timestamp": "2024-01-15T11:10:00Z",
+    "channel": "email"
+  }
+]

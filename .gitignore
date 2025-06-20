@@ -1,0 +1,106 @@
+# Environment files
+.env
+.env.local
+.env.*.local
+env.template
+
+# API Keys and Secrets
+*.key
+*.secret
+*.pem
+*.p12
+*.pfx
+
+# Logs
+*.log
+logs/
+app.log
+
+# Process files
+*.pid
+.app.pid
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pytest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Kafka/Confluent specific
+*.avsc
+*.avro
+consumer_offsets/
+kafka-logs/
+
+# Data files (if they contain sensitive info)
+data/*.json
+data/*.csv
+data/*.parquet
+!data/sample_*
+!data/schema_*
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+
+# Configuration backups
+*.conf.bak
+*.config.bak

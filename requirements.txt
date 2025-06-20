@@ -1,0 +1,14 @@
+gradio>=4.0.0
+confluent-kafka[avro,json,protobuf,schemaregistry]>=2.3.0
+anthropic>=0.25.0
+pandas>=2.0.0
+numpy>=1.24.0
+plotly>=5.17.0
+python-dotenv>=1.0.0
+fastapi>=0.104.0
+uvicorn>=0.24.0
+websockets>=12.0
+pydantic>=2.5.0
+aiohttp>=3.9.0
+rich>=13.7.0
+textblob>=0.17.1
