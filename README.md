@@ -27,6 +27,18 @@ Customer Messages → Kafka Stream → Sentiment Analysis → AI Response → Da
                                  Escalation Logic
 ```
 
+
+
+## Confluent Stream-lineage:
+
+https://drive.google.com/file/d/1GZq2h_5EXjfJqo7vR_5xm817IeHqAFH7/view?usp=sharing
+
+
+![Alt text](demo/Stream-lineage.png)
+
+
+
+
 ## 📊 **Features**
 
 ### **Real-Time Analytics**
