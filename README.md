@@ -788,10 +788,10 @@ Contact Center support with multi agent system to query customers request over v
 Example: 
 
 ****Customer****: Help me with my order delivery status 
-****Agent****: Your current order list : Apple Tv - reaching today, Music box - reaching tomorrow 
+Agent Response: Your current order list : Apple Tv - reaching today, Music box - reaching tomorrow 
 
 ****Customer****: Not happy with the product delivered it is broken, help me with support ticket and address my issue or refund.
-****Agent****: I'm really sorry to hear that the product you received was damaged. I've created a support ticket for this issue and escalated it to our resolution team. You’ll receive an update shortly regarding the replacement or refund process.
+Agent Response: I'm really sorry to hear that the product you received was damaged. I've created a support ticket for this issue and escalated it to our resolution team. You’ll receive an update shortly regarding the replacement or refund process.
 
 In the meantime, could you please confirm if you'd prefer a replacement or a refund? Also, if possible, kindly share a photo of the damaged item to help us process this faster.
 
